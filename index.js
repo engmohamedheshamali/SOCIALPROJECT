@@ -1,20 +1,30 @@
-import express from "express";
-import { pagesRouter } from "./routes/pages.routes.js";
+import crypto from "node:crypto";
 
-const app = express();
+export const memoryDb = {
+  users: [],
+  sessions: [],
+  posts: [],
+  comments: [],
+  likes: [],
+};
 
-app.use((req, res, next) => {
-  console.log(new Date().toLocaleString(), req.method, req.url);
-  next();
-});
+export function resetDb() {
+  memoryDb.users = [];
+  memoryDb.sessions = [];
+  memoryDb.posts = [];
+  memoryDb.comments = [];
+  memoryDb.likes = [];
+}
 
-app.use(pagesRouter);
+export function nextId(list) {
+  if (!list.length) return 1;
+  return Math.max(...list.map((item) => Number(item.id) || 0)) + 1;
+}
 
-app.use((err, req, res, next) => {
-  console.log("err", err);
-  res.status(500).json({ error: "something went wrong" });
-});
+export function randomSessionId() {
+  return crypto.randomBytes(32).toString("hex");
+}
 
-app.listen(3000, () => {
-  console.log("listening on port 3000");
-});
+export function nowIso() {
+  return new Date().toISOString();
+}

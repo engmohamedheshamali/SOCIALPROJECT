@@ -2,6 +2,16 @@
 
 A simple class blog with session-based authentication, posts, comments and likes. The frontend is fully built — the backend uses Express 5 + Drizzle ORM (PostgreSQL), with a manual sessions table (no auth packages), Zod validation, and multer for image uploads.
 
+## Requirements Checklist
+
+- User registration with username, email, password, and confirmation validation.
+- Session-based login/logout flow with secure cookie storage.
+- Protected routes for the authenticated user session.
+- CRUD-style blog feed with post creation, detail view, likes, and comments.
+- Upload validation for image files under 5MB and supported formats.
+- Error responses using the documented JSON structure for validation and not-found cases.
+- Test coverage for auth flow and core post interactions.
+
 ## Project Structure
 
 ```
